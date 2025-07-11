@@ -1,9 +1,10 @@
-# Ruby Text Preprocessor for Unity Text Mesh Pro
 A component that allows the usage of `<ruby>` tag for furigana.
 ## Example
 ```
-これは<ruby>漢字<rt>kanji</rt></ruby>です
+これは<ruby>漢字<rt>かんじ</rt></ruby>です
 ```
+
+![Example Image](/example.png)
 
 ## How It Works
 This leverages `ITextPreprocessor` supplied to a `TMP_Text` to transform the input string into a desired string. The string is decorated with rich text tags to format the placement and size of the base text and the ruby text. The length of base text and ruby text are calculated to determine offsets needed.
@@ -29,3 +30,5 @@ result = $"<nobr><space={baseInitOffset:#.##}em>{baseText}<space={rubyInitOffset
 - Usage of other rich text tags that change spacing inside ruby tag might mess up the offset calculations.
 - It allocates on heap one `string` because the `ITextPreprocessor` returns a `string`.
 - Haven't checked on RTL writing systems.
+## Known Issues
+- If the last part of string is surrounded by `<ruby>` tag and not followed by a non-whitespace text, alignment other than left doesn't work.
